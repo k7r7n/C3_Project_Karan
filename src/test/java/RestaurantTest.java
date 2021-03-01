@@ -4,6 +4,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
@@ -64,5 +65,15 @@ class RestaurantTest {
 
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
+    }
+    @Test
+    public void total_amount_of_items_selected_should_be_shown(){
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        Restaurant my_res =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+        my_res.addToMenu("Sweet corn soup",119);
+        my_res.addToMenu("Vegetable lasagne", 269);
+        List menu = my_res.getMenu();
+        restaurant.orderAmount(menu);
     }
 }
